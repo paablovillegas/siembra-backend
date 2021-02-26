@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getDescuentos = async (req = request, res = response) => {
     try {
         const descuentos = Descuento.find();
-        return res.status(200)({ ok: true, descuentos });
+        return res.json({ ok: true, descuentos });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getDescuento = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const descuento = Descuento.findById(uid);
-        return res.status(200)({ ok: true, descuento });
+        return res.json({ ok: true, descuento });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,7 +34,7 @@ const insertDescuento = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await descuento.save();
-        res.status(200).json({ ok: true, descuento });
+        res.json({ ok: true, descuento });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -60,7 +60,7 @@ const updateDescuento = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, descuento });
+        res.json({ ok: true, descuento });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -80,7 +80,7 @@ const deleteDescuento = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Descuento no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {

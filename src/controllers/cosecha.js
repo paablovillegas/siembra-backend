@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getCosechas = async (req = request, res = response) => {
     try {
         const cosechas = Cosecha.find();
-        return res.status(200)({ ok: true, cosechas });
+        return res.json({ ok: true, cosechas });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getCosecha = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const cosecha = Cosecha.findById(uid);
-        return res.status(200)({ ok: true, cosecha });
+        return res.json({ ok: true, cosecha });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,12 +34,10 @@ const insertCosecha = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await cosecha.save();
-        res.status(200).json({ ok: true, cosecha });
+        res.json({ ok: true, cosecha });
     } catch (err) {
         console.log(err);
-        res.status(500).json({
-            ok: false
-        });
+        res.status(500).json({ ok: false });
     }
 }
 
@@ -60,12 +58,10 @@ const updateCosecha = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, cosecha });
+        res.json({ ok: true, cosecha });
     } catch (err) {
         console.log(err);
-        res.status(500).json({
-            ok: false
-        });
+        res.status(500).json({ ok: false });
     }
 }
 
@@ -80,14 +76,12 @@ const deleteCosecha = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Cosecha no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {
         console.log(err);
-        res.status(500).json({
-            ok: false
-        });
+        res.status(500).json({ ok: false });
     }
 }
 

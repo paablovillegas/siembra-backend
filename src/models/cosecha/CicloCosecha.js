@@ -1,6 +1,7 @@
 const { Schema } = require("mongoose");
 const TablaSchema = require("../rancho/Tabla");
 const ItemCosechaSchema = require("./ItemCosecha");
+
 const CicloCosechaSchema = new Schema({
     ciclo: {
         type: String,

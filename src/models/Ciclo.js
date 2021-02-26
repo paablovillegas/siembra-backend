@@ -1,19 +1,13 @@
 const { Schema, model } = require("mongoose");
-const TablaSchema = require("./rancho/Tabla");
 
 const CicloSchema = new Schema({
     ciclo: {
         type: String,
         required: true,
     },
-    rancho: {
-        type: Schema.Types.ObjectId,
-        ref: 'Rancho',
-        required: true,
-    },
     tabla: {
-        type: TablaSchema,
-        required: true,
+        type: Schema.Types.ObjectId,
+        ref: 'Rancho.Tablas',
     },
     producto: {
         type: Schema.Types.ObjectId,
@@ -26,16 +20,13 @@ const CicloSchema = new Schema({
     },
     fecha_siembra: {
         type: Date,
-        required: true,
     },
     fecha_cosecha: {
         type: Date,
-        required: true,
     },
     fecha_fin: {
         type: Date,
-        required: true,
     },
 });
 
-module.exports = model('Area', CicloSchema);
+module.exports = model('Ciclo', CicloSchema);

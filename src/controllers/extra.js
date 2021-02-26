@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getExtras = async (req = request, res = response) => {
     try {
         const extras = Extra.find();
-        return res.status(200)({ ok: true, extras });
+        return res.json({ ok: true, extras });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getExtra = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const extra = Extra.findById(uid);
-        return res.status(200)({ ok: true, extra });
+        return res.json({ ok: true, extra });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,7 +34,7 @@ const insertExtra = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await extra.save();
-        res.status(200).json({ ok: true, extra });
+        res.json({ ok: true, extra });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -60,7 +60,7 @@ const updateExtra = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, extra });
+        res.json({ ok: true, extra });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -80,7 +80,7 @@ const deleteExtra = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Extra no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {

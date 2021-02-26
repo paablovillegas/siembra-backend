@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getPrestamos = async (req = request, res = response) => {
     try {
         const prestamos = Prestamo.find();
-        return res.status(200)({ ok: true, prestamos });
+        return res.json({ ok: true, prestamos });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getPrestamo = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const prestamo = Prestamo.findById(uid);
-        return res.status(200)({ ok: true, prestamo });
+        return res.json({ ok: true, prestamo });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,7 +34,7 @@ const insertPrestamo = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await prestamo.save();
-        res.status(200).json({ ok: true, prestamo });
+        res.json({ ok: true, prestamo });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -60,7 +60,7 @@ const updatePrestamo = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, prestamo });
+        res.json({ ok: true, prestamo });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -80,7 +80,7 @@ const deletePrestamo = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Prestamo no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {

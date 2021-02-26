@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getAsistencias = async (req = request, res = response) => {
     try {
         const asistencias = Asistencia.find();
-        return res.status(200)({ ok: true, asistencias });
+        return res.json({ ok: true, asistencias });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getAsistencia = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const asistencia = Asistencia.findById(uid);
-        return res.status(200)({ ok: true, asistencia });
+        return res.json({ ok: true, asistencia });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,7 +34,7 @@ const insertAsistencia = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await asistencia.save();
-        res.status(200).json({ ok: true, asistencia });
+        res.json({ ok: true, asistencia });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -60,7 +60,7 @@ const updateAsistencia = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, asistencia });
+        res.json({ ok: true, asistencia });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -80,7 +80,7 @@ const deleteAsistencia = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Asistencia no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {

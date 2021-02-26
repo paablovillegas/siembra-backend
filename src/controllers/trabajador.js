@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getTrabajadors = async (req = request, res = response) => {
     try {
         const trabajadores = Trabajador.find();
-        return res.status(200)({ ok: true, trabajadores });
+        return res.json({ ok: true, trabajadores });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getTrabajador = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const trabajador = Trabajador.findById(uid);
-        return res.status(200)({ ok: true, trabajador });
+        return res.json({ ok: true, trabajador });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,7 +34,7 @@ const insertTrabajador = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await trabajador.save();
-        res.status(200).json({ ok: true, trabajador });
+        res.json({ ok: true, trabajador });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -60,7 +60,7 @@ const updateTrabajador = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, trabajador });
+        res.json({ ok: true, trabajador });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -80,7 +80,7 @@ const deleteTrabajador = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Trabajador no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {

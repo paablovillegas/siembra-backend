@@ -17,4 +17,4 @@ const PrestamoSchema = new Schema({
     pagos: [PagoSchema],
 });
 
-module.exports = model('Producto', PrestamoSchema);
+module.exports = model('Prestamo', PrestamoSchema);

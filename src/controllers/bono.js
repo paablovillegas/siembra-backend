@@ -3,10 +3,10 @@ const { request, response } = require("express")
 const getbono = async (req = request, res = response) => {
     try {
         const bono = Bono.find();
-        return res.status(200)({ ok: true, bono });
+        return res.json({ ok: true, bono });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -14,10 +14,10 @@ const getBono = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
         const bono = Bono.findById(uid);
-        return res.status(200)({ ok: true, bono });
+        return res.json({ ok: true, bono });
     } catch (err) {
         console.log(err);
-        return res.status(500)({ ok: false });
+        return res.status(500).json({ ok: false });
     }
 };
 
@@ -34,7 +34,7 @@ const insertBono = async (req = request, res = response) => {
             fecha_creacion: new Date(),
         });
         await bono.save();
-        res.status(200).json({ ok: true, bono });
+        res.json({ ok: true, bono });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -60,7 +60,7 @@ const updateBono = async (req = request, res = response) => {
             },
             { new: true }
         );
-        res.status(200).json({ ok: true, bono });
+        res.json({ ok: true, bono });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -80,7 +80,7 @@ const deleteBono = async (req = request, res = response) => {
                         ok: false,
                         msg: 'Bono no registrada !'
                     });
-                res.status(200).json({ ok: true });
+                res.json({ ok: true });
             }
         )
     } catch (err) {

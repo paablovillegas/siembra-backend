@@ -8,10 +8,6 @@ const CosechaSchema = new Schema({
         type: Number,
         required: true,
     },
-    rancho: {
-        type: Schema.Types.ObjectId,
-        required: true,
-    },
     destino: {
         type: Schema.Types.ObjectId,
         required: true,
