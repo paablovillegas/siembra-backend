@@ -53,10 +53,10 @@ const updateTabla = async (req = request, res = response) => {
     try {
         const rancho = await Rancho.findOneAndUpdate(
             { 'tablas._id': mongoose.Types.ObjectId(uid) },
-            { $set: { 'tablas.$': { ...req.body } } },
+            { $set: { 'tablas.$': req.body } },
             { new: true },
         );
-        return res.status(200).json({ ok: true, rancho });
+        return res.json({ ok: true, rancho });
     } catch (err) {
         console.log(err)
         return res.status(500).json({ ok: false });
@@ -70,7 +70,7 @@ const deleteTabla = async (req = request, res = response) => {
             { $pull: { tablas: { _id: mongoose.Types.ObjectId(uid) } } },
             { new: true },
         );
-        return res.status(200).json({ ok: true, rancho });
+        return res.json({ ok: true, rancho });
     } catch (err) {
         return res.status(500).json({ ok: false });
     }

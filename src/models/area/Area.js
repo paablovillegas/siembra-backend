@@ -1,16 +1,13 @@
 const { Schema, model } = require("mongoose");
-const Actividad = require("./Actividad");
+const ActividadSchema = require("./Actividad");
 
 const AreaSchema = new Schema({
     area: {
         type: String,
         required: true,
+        unique: true,
     },
-    actividades: {
-        type: [Actividad],
-        required: true,
-        default: [],
-    }
+    actividades: [ActividadSchema],
 });
 
 module.exports = model('Area', AreaSchema);

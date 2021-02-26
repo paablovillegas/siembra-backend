@@ -1,19 +1,54 @@
 const { request, response } = require("express");
+const Area = require("../models/area/Area");
 
-const getAreas = (req = request, res = response) => {
-    res.json({ ok: true });
+const getAreas = async (req = request, res = response) => {
+    try {
+        const areas = await Area.find();
+        return res.json({ ok: true, areas });
+    } catch (err) {
+        return res.status(500).json({ ok: false });
+    }
 }
-const getArea = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const getArea = async (req = request, res = response) => {
+    const { uid } = req.params;
+    try {
+        const area = await Area.findById(uid);
+        return res.json({ ok: true, area });
+    } catch (err) {
+        return res.status(500).json({ ok: false });
+    }
 }
-const insertArea = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const insertArea = async (req = request, res = response) => {
+    try {
+        const area = new Area(req.body);
+        await area.save();
+        return res.json({ ok: true, area });
+    } catch (err) {
+        return res.status(500).json({ ok: false });
+    }
 }
-const updateArea = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const updateArea = async (req = request, res = response) => {
+    const { uid } = req.params;
+    try {
+        const area = await Area
+            .findByIdAndUpdate(uid, { ...req.body }, { new: true });
+        return res.json({ ok: true, area });
+    } catch (err) {
+        return res.status(500).json({ ok: false });
+    }
 }
-const deleteArea = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const deleteArea = async (req = request, res = response) => {
+    const { uid } = req.params;
+    try {
+        await Area.findByIdAndDelete(uid);
+        return res.json({ ok: true });
+    } catch (err) {
+        return res.status(500).json({ ok: false });
+    }
 }
 
 module.exports = {
