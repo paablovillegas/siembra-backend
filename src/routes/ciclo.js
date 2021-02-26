@@ -1,8 +1,9 @@
 const { Router } = require("express");
+const { getCiclos, getCiclo, insertCiclo, updateCiclo, deleteCiclo } = require("../controllers/ciclo");
 
 const router = Router();
 
-router.get('/', getCiclo);
+router.get('/', getCiclos);
 router.get('/:uid', getCiclo);
 router.post('/', insertCiclo);
 router.put('/:uid', updateCiclo);

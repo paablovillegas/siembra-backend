@@ -1,5 +1,5 @@
 const fileUpload = require('express-fileupload');
-const passport = require('passport');
+// const passport = require('passport');
 const express = require('express');
 const dayjs = require('dayjs');
 const cors = require('cors');
@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const { definePrototypes } = require('./helpers/prototypes');
 const { dbConnection } = require('./database/config');
-const jwtAuth = require('./middlewares/passport');
+// const jwtAuth = require('./middlewares/passport');
 const logger = require('./helpers/logger');
 
 //Dates en español
@@ -29,8 +29,10 @@ app.use(cors());
 app.use(express.json());
 
 //Passport middleware
+/*
 app.use(passport.initialize());
 jwtAuth(passport);
+*/
 
 //File Upload
 app.use(fileUpload({
@@ -38,6 +40,18 @@ app.use(fileUpload({
     tempFileDir: '/tmp/',
     createParentPath: true,
 }));
+
+app.get('/prueba', (req, res) => {
+    res.json({ ok: true });
+});
+
+app.use('/siembra/ranchos', require('./routes/rancho'));
+app.use('/siembra/tablas', require('./routes/tabla'));
+app.use('/siembra/areas', require('./routes/area'));
+app.use('/siembra/actividades', require('./routes/actividad'));
+app.use('/siembra/ciclos', require('./routes/ciclo'));
+app.use('/siembra/lugares_trabajo', require('./routes/lugar_trabajo'));
+
 const { PORT } = process.env;
 app.listen(PORT, () => {
     logger.info(`Servidor levantado ${PORT}`);
