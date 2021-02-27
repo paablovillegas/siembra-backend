@@ -1,19 +1,51 @@
 const { request, response } = require("express");
+const Ciclo = require("../models/Ciclo");
 
-const getCiclos = (req = request, res = response) => {
-    res.json({ ok: true });
+const getCiclos = async (req = request, res = response) => {
+    try {
+        const ciclos = await Ciclo.find().populate('tabla');
+        return res.json({ ok: true, ciclos })
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ ok: false });
+    }
 }
-const getCiclo = (req = request, res = response) => {
-    res.json({ ok: true });
+const getCiclo = async (req = request, res = response) => {
+    const { tid, uid } = req.params;
+    try {
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ ok: false });
+    }
 }
-const insertCiclo = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const insertCiclo = async (req = request, res = response) => {
+    try {
+        const ciclo = new Ciclo(req.body);
+        await ciclo.save();
+        return res.json({ ok: true, ciclo });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ ok: false });
+    }
 }
-const updateCiclo = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const updateCiclo = async (req = request, res = response) => {
+    const { tid, uid } = req.params;
+    try {
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ ok: false });
+    }
 }
-const deleteCiclo = (req = request, res = response) => {
-    res.json({ ok: true });
+
+const deleteCiclo = async (req = request, res = response) => {
+    const { tid, uid } = req.params;
+    try {
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ ok: false });
+    }
 }
 
 module.exports = {
