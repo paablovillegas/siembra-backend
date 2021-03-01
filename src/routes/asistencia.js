@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { getAsistencias, getAsistencia, insertAsistencia, updateAsistencia, deleteAsistencia } = require("../controllers/asistencia");
 
 const router = Router();
 

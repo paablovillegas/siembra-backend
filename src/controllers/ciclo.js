@@ -3,7 +3,7 @@ const Ciclo = require("../models/Ciclo");
 
 const getCiclos = async (req = request, res = response) => {
     try {
-        const ciclos = await Ciclo.find().populate('tabla');
+        const ciclos = await Ciclo.find().populate('producto');
         return res.json({ ok: true, ciclos })
     } catch (err) {
         console.log(err);

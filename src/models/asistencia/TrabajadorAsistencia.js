@@ -1,11 +1,18 @@
 const { Schema } = require("mongoose");
 
 const TrabajadorAsistenciaSchema = new Schema({
-    nombre: {
+    nombres: {
         type: String,
         required: true,
     }, 
-    salario: {
+    apellido_paterno: {
+        type: String,
+        required: true,
+    },
+    apellido_materno: {
+        type: String,
+    },
+    sueldo: {
         type: Number,
         required: true,
         default: 0,

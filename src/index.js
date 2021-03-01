@@ -52,6 +52,8 @@ app.use('/siembra/actividades', require('./routes/actividad'));
 app.use('/siembra/productos', require('./routes/producto'));
 app.use('/siembra/ciclos', require('./routes/ciclo'));
 app.use('/siembra/lugares_trabajo', require('./routes/lugar_trabajo'));
+app.use('/siembra/trabajadores', require('./routes/trabajador'));
+app.use('/siembra/asistencias', require('./routes/asistencia'));
 
 const { PORT } = process.env;
 app.listen(PORT, () => {

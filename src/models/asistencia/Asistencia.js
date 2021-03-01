@@ -1,5 +1,7 @@
 const { Schema } = require("mongoose");
+const AsistenciaTrabajadorSchema = require("./AsistenciaTrabajador");
 const BonoSchema = require("./Bono");
+const DescuentoSchema = require("./Descuento");
 const ExtraSchema = require("./Extra");
 const TrabajadorAsistenciaSchema = require("./TrabajadorAsistencia");
 

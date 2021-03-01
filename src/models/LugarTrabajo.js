@@ -11,16 +11,11 @@ const LugarTrabajoSchema = new Schema({
         required: true,
         default: 'base',
     },
-    fletes: {
-        type: [Object],//TODO: Arreglar
-        required: true,
-        default: [],
-    },
-    trabajadores: {
-        type: [Schema.Types.ObjectId],
-        required: true,
-        default: [],
-    },
+    fletes: [Map],
+    trabajadores: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Trabajador',
+    }],
 });
 
 module.exports = new model(

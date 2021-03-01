@@ -30,7 +30,7 @@ const TrabajadorSchema = new Schema({
     domicilio: {
         type: String,
     },
-    feccha_alta: {
+    fecha_alta: {
         type: Date,
         required: true,
     },
@@ -38,12 +38,10 @@ const TrabajadorSchema = new Schema({
         type: Date,
     },
     salario: {
-        type: [Object],
-        default: []
+        type: Map,
     },
     evidencias: {
-        type: [Object],
-        default: [],
+        type: Map,
     },
 });
 

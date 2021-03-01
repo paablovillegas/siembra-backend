@@ -1,8 +1,9 @@
-const { request, response } = require("express")
+const { request, response } = require("express");
+const Trabajador = require("../models/Trabajador");
 
-const getTrabajadors = async (req = request, res = response) => {
+const getTrabajadores = async (req = request, res = response) => {
     try {
-        const trabajadores = Trabajador.find();
+        const trabajadores = await Trabajador.find();
         return res.json({ ok: true, trabajadores });
     } catch (err) {
         console.log(err);
@@ -13,7 +14,7 @@ const getTrabajadors = async (req = request, res = response) => {
 const getTrabajador = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
-        const trabajador = Trabajador.findById(uid);
+        const trabajador = await Trabajador.findById(uid);
         return res.json({ ok: true, trabajador });
     } catch (err) {
         console.log(err);
@@ -24,11 +25,13 @@ const getTrabajador = async (req = request, res = response) => {
 const insertTrabajador = async (req = request, res = response) => {
     try {
         let trabajador = await Trabajador.findOne();
+        /*
         if (trabajador)
             return res.status(400).json({
                 ok: false,
-                msg: 'trabajador existente !'
+                msg: 'Trabajador existente !'
             });
+        */
         trabajador = new Trabajador({
             ...req.body,
             fecha_creacion: new Date(),
@@ -78,7 +81,7 @@ const deleteTrabajador = async (req = request, res = response) => {
                 if (err)
                     return res.status(400).json({
                         ok: false,
-                        msg: 'Trabajador no registrada !'
+                        msg: 'Trabajador no registrado !'
                     });
                 res.json({ ok: true });
             }

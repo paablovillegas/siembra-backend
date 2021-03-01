@@ -4,10 +4,12 @@ const AsistenciaSchema = require("./Asistencia");
 const AsistenciaLugarSchema = new Schema({
     lugar_trabajo: {
         type: Schema.Types.ObjectId,
+        ref: 'Lugar_Trabajo',
         required: true,
     },
     rancho: {
         type: Schema.Types.ObjectId,
+        ref: 'Rancho',
         required: true,
     },
     flete: {
