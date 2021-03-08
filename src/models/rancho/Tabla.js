@@ -11,6 +11,7 @@ const TablaSchema = new Schema({
     libre: {
         type: Boolean,
         required: true,
+        default: true,
     },
 });
 

@@ -11,7 +11,7 @@ const LugarTrabajoSchema = new Schema({
         required: true,
         default: 'base',
     },
-    fletes: [Map],
+    fletes: Map,
     trabajadores: [{
         type: Schema.Types.ObjectId,
         ref: 'Trabajador',

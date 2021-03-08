@@ -40,7 +40,7 @@ const insertTabla = async (req = request, res = response) => {
     try {
         let rancho = await Rancho.findById(rid);
         rancho.tablas = [...rancho.tablas, { ...req.body }];
-        rancho.save();
+        await rancho.save();
         rancho = await Rancho.findById(rid);
         return res.json({ ok: true, rancho });
 
@@ -48,6 +48,7 @@ const insertTabla = async (req = request, res = response) => {
         return res.status(500).json({ ok: false });
     }
 }
+
 const updateTabla = async (req = request, res = response) => {
     const { uid } = req.params;
     try {

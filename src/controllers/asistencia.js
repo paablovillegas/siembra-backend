@@ -8,7 +8,10 @@ const Trabajador = require("../models/Trabajador");
 
 const getAsistencias = async (req = request, res = response) => {
     try {
-        const asistencias = Asistencia.find();
+        const asistencias = await AsistenciaLugar.find().populate([
+            {path: 'rancho lugarTrabajo', select: ' -tablas'},
+            {path: 'lugar_trabajo', select: '-trabajadores'},
+        ]);
         return res.json({ ok: true, asistencias });
     } catch (err) {
         console.log(err);
@@ -87,21 +90,18 @@ const insertAsistencia = async (req = request, res = response) => {
 const updateAsistencia = async (req = request, res = response) => {
     const { uid } = req.params;
     try {
-        let asistencia = await Asistencia.findById(uid);
+        let asistencia = await AsistenciaLugar
+            .findOneAndUpdate(
+                { 'trabajadores.asistencia._id': ObjectId(uid) },
+                { $set: { "trabajadores.$.asistencia.salida": parseDate(req.body.salida) } },
+                { new: true }
+            );
         if (!asistencia)
             return res.status(400).json({
                 ok: false,
-                msg: 'Asistencia no existente !'
+                msg: 'Asistencia no existente !',
             });
-        asistencia = await Asistencia.findByIdAndUpdate(
-            uid,
-            {
-                ...req.body,
-                fecha_actualizacion: new Date(),
-            },
-            { new: true }
-        );
-        res.json({ ok: true, asistencia });
+        res.json({ ok: true, asistencia: asistencia.trabajadores });
     } catch (err) {
         console.log(err);
         res.status(500).json({

@@ -1,7 +1,7 @@
 const { Schema } = require("mongoose");
 
 const DescuentoSchema = new Schema({
-    cantidad: {
+    total: {
         type: Number,
         required: true,
     },
