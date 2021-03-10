@@ -9,7 +9,7 @@ const Trabajador = require("../models/Trabajador");
 const getAsistencias = async (req = request, res = response) => {
     try {
         const asistencias = await AsistenciaLugar.find().populate([
-            {path: 'rancho lugarTrabajo', select: ' -tablas'},
+            {path: 'rancho', select: ' -tablas'},
             {path: 'lugar_trabajo', select: '-trabajadores'},
         ]);
         return res.json({ ok: true, asistencias });

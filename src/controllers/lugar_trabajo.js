@@ -27,6 +27,7 @@ const insertLugarTrabajo = async (req = request, res = response) => {
         await lugar_trabajo.save();
         return res.json({ ok: true, lugar_trabajo });
     } catch (err) {
+        console.log(err);
         res.status(500).json({ ok: false });
     }
 }

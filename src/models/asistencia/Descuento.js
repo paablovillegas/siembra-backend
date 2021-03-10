@@ -15,7 +15,6 @@ const DescuentoSchema = new Schema({
     },
     autorizacion: {
         type: Schema.Types.ObjectId,
-        required: true,
     },
 });
 
