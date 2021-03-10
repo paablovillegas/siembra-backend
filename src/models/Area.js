@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const ActividadSchema = require("./Actividad");
 
 const AreaSchema = new Schema({
     area: {
@@ -7,7 +6,11 @@ const AreaSchema = new Schema({
         required: true,
         unique: true,
     },
-    actividades: [ActividadSchema],
+    actividades: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Actividad',
+        
+    }],
 });
 
 module.exports = model('Area', AreaSchema);

@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const TablaSchema = require("./Tabla");
 
 const RanchoSchema = new Schema({
     rancho: {
@@ -12,11 +11,10 @@ const RanchoSchema = new Schema({
     alias: {
         type: String,
     },
-    tablas: {
-        type: [TablaSchema],
-        required: true,
-        default: [],
-    }
+    tablas: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Tabla'
+    }]
 });
 
 module.exports = model('Rancho', RanchoSchema);

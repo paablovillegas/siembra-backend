@@ -46,9 +46,7 @@ app.get('/prueba', (req, res) => {
 });
 
 app.use('/siembra/ranchos', require('./routes/rancho'));
-app.use('/siembra/tablas', require('./routes/tabla'));
 app.use('/siembra/areas', require('./routes/area'));
-app.use('/siembra/actividades', require('./routes/actividad'));
 app.use('/siembra/productos', require('./routes/producto'));
 app.use('/siembra/ciclos', require('./routes/ciclo'));
 app.use('/siembra/lugares_trabajo', require('./routes/lugar_trabajo'));

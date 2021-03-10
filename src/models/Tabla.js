@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const TablaSchema = new Schema({
     tabla: {
@@ -15,4 +15,4 @@ const TablaSchema = new Schema({
     },
 });
 
-module.exports = TablaSchema;
+module.exports = model('Tabla', TablaSchema);

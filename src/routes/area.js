@@ -1,17 +1,17 @@
 const { Router } = require("express");
-const { getAreas, getArea, insertArea, updateArea, deleteArea } = require("../controllers/area");
+const { validateURL, getAreas, getArea, insertArea, updateArea, deleteArea } = require("../controllers/area");
 
 const router = Router();
 
 router.get('/', getAreas);
 
-router.get('/:uid', getArea);
+router.get('/:uid', validateURL, getArea);
 
 router.post('/', insertArea);
 
-router.put('/:uid', updateArea);
+router.put('/:uid', validateURL, updateArea);
 
-router.delete('/:uid', deleteArea);
+router.delete('/:uid', validateURL, deleteArea);
 
 
 module.exports = router;
