@@ -16,24 +16,3 @@ const ExtraSchema = new Schema({
 });
 
 module.exports = ExtraSchema;
-
-/*
-    lugar_trabajo: {
-        type: Schema.Types.ObjectId,
-        required: true,
-    },
-    rancho: {
-        type: Schema.Types.ObjectId,
-        required: true,
-    },
-    flete: {
-        type: Number,
-    },
-    fecha: {
-        type: Date,
-        required: true,
-    },
-    trabajapdores: {
-        type: []
-    }
- */

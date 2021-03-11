@@ -1,88 +1,72 @@
-const { request, response } = require("express")
+const { request, response } = require("express");
+const Cosecha = require("../models/cosecha/Cosecha");
 
-const getCosechas = async (req = request, res = response) => {
-    try {
-        const cosechas = Cosecha.find();
-        return res.json({ ok: true, cosechas });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({ ok: false });
-    }
+const getCosechas = (req = request, res = response) => {
+    Cosecha.find()
+        .then(cosecha => res.json({ ok: true, cosecha }))
+        .catch(err => {
+            console.log(err);
+            return res.status(400).json({
+                ok: false,
+                err: 'Error al obtener el ciclo'
+            });
+        });
 };
 
 const getCosecha = async (req = request, res = response) => {
     const { uid } = req.params;
-    try {
-        const cosecha = Cosecha.findById(uid);
-        return res.json({ ok: true, cosecha });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({ ok: false });
-    }
+    Cosecha.findById(uid)
+        .then(cosecha => {
+            if (cosecha)
+                return res.json({ ok: true, cosecha })
+            return res.status(400).json({ ok: false, cosecha })
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(400).json({
+                ok: false,
+                err: 'Error al obtener el ciclo'
+            });
+        });
 };
 
 const insertCosecha = async (req = request, res = response) => {
-    try {
-        let cosecha = await Cosecha.findOne();
-        if (cosecha)
+    let cosecha = new Cosecha(req.body);
+    cosecha.save()
+        .then(cosecha => res.json({ ok: true, cosecha }))
+        .catch(err => {
+            console.log(err);
             return res.status(400).json({
                 ok: false,
-                msg: 'cosecha existente !'
+                err: 'Error al insertar el ciclo'
             });
-        cosecha = new Cosecha({
-            ...req.body,
-            fecha_creacion: new Date(),
         });
-        await cosecha.save();
-        res.json({ ok: true, cosecha });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ ok: false });
-    }
 }
 
 const updateCosecha = async (req = request, res = response) => {
     const { uid } = req.params;
-    try {
-        let cosecha = await Cosecha.findById(uid);
-        if (!cosecha)
+    Cosecha.findByIdAndUpdate(uid, req.body, { new: true })
+        .then(cosecha => res.json({ ok: true, cosecha }))
+        .catch(err => {
+            console.log(err);
             return res.status(400).json({
                 ok: false,
-                msg: 'Cosecha no existente !'
+                err: 'Error al actualizar el ciclo'
             });
-        cosecha = await Cosecha.findByIdAndUpdate(
-            uid,
-            {
-                ...req.body,
-                fecha_actualizacion: new Date(),
-            },
-            { new: true }
-        );
-        res.json({ ok: true, cosecha });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ ok: false });
-    }
+        });
 }
 
 const deleteCosecha = async (req = request, res = response) => {
     const { uid } = req.params;
-    try {
-        Cosecha.findByIdAndDelete(
-            uid,
-            function (err, _) {
-                if (err)
-                    return res.status(400).json({
-                        ok: false,
-                        msg: 'Cosecha no registrada !'
-                    });
-                res.json({ ok: true });
-            }
-        )
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ ok: false });
-    }
+    Cosecha.findByIdAndDelete(uid)
+        .then(_ => res.json({ ok: true }))
+        .catch(err => {
+            console.log(err);
+            return res.status(400).json({
+                ok: false,
+                err: 'Error al eliminar el ciclo'
+            });
+        });
 }
 
 module.exports = {

@@ -7,6 +7,7 @@ const ActividadSchema = new Schema({
     },
     tablas: {
         type: [Schema.Types.ObjectId],
+        default: undefined,
     },
 });
 

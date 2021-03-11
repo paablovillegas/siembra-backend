@@ -12,10 +12,6 @@ const CosechaSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
     },
-    fecha: {
-        type: Date,
-        required: true,
-    },
     fecha_salida: {
         type: Date,
         required: true,

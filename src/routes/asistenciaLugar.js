@@ -12,12 +12,12 @@ const router = Router();
 
 router.get('/', getAsistenciasLugar);
 
-router.get('/:uid', getAsistenciaLugar);
+router.get('/:uid', validateURL, getAsistenciaLugar);
 
 router.post('/', insertAsistenciaLugar);
 
-router.put('/:uid', updateAsistenciaLugar);
+router.put('/:uid', validateURL, updateAsistenciaLugar);
 
-router.delete('/:uid', deleteAsistenciaLugar);
+router.delete('/:uid', validateURL, deleteAsistenciaLugar);
 
 module.exports = router;
