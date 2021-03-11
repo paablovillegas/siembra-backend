@@ -45,4 +45,4 @@ const TrabajadorSchema = new Schema({
     },
 });
 
-module.exports = new model('Trabajador', TrabajadorSchema, 'Trabajadores');
+module.exports = new model('Trabajador', TrabajadorSchema, 'trabajadores');

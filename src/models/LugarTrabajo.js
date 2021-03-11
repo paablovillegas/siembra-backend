@@ -7,9 +7,9 @@ const LugarTrabajoSchema = new Schema({
     },
     tipo_lugar: {
         type: String,
-        enum: ['base', 'cuadrilla', 'cosecha'],
+        enum: ['Base', 'Cuadrilla', 'Cosecha'],
         required: true,
-        default: 'base',
+        default: 'Base',
     },
     fletes: Map,
     trabajadores: [{
@@ -21,5 +21,5 @@ const LugarTrabajoSchema = new Schema({
 module.exports = new model(
     'LugarTrabajo',
     LugarTrabajoSchema,
-    'Lugares_Trabajo',
+    'lugares_trabajo',
 );

@@ -7,6 +7,7 @@ const CicloSchema = new Schema({
     },
     tabla: {
         type: Schema.Types.ObjectId,
+        ref: 'Tabla',
         required: true,
     },
     producto: {

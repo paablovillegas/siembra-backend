@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { getLugaresTrabajo, getLugarTrabajo, insertLugarTrabajo, updateLugarTrabajo, deleteLugarTrabajo } = require("../controllers/lugar_trabajo");
+const { validateURL, getLugaresTrabajo, getLugarTrabajo, insertLugarTrabajo, updateLugarTrabajo, deleteLugarTrabajo } = require("../controllers/lugar_trabajo");
 
 const router = Router();
 
 router.get('/', getLugaresTrabajo);
-router.get('/:uid', getLugarTrabajo);
+router.get('/:uid', validateURL, getLugarTrabajo);
 router.post('/', insertLugarTrabajo);
-router.put('/:uid', updateLugarTrabajo);
-router.delete('/:uid', deleteLugarTrabajo);
+router.put('/:uid', validateURL, updateLugarTrabajo);
+router.delete('/:uid', validateURL, deleteLugarTrabajo);
 
 module.exports = router;
