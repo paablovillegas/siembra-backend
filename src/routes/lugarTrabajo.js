@@ -1,5 +1,12 @@
 const { Router } = require("express");
-const { validateURL, getLugaresTrabajo, getLugarTrabajo, insertLugarTrabajo, updateLugarTrabajo, deleteLugarTrabajo } = require("../controllers/lugar_trabajo");
+const {
+    validateURL,
+    getLugaresTrabajo,
+    getLugarTrabajo,
+    insertLugarTrabajo,
+    updateLugarTrabajo,
+    deleteLugarTrabajo
+} = require("../controllers/lugarTrabajo");
 
 const router = Router();
 

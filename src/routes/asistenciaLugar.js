@@ -1,10 +1,23 @@
 const { Router } = require("express");
-const { getAsistenciaLugar, insertAsistenciaLugar } = require("../controllers/asistenciaLugar");
+const {
+    validateURL,
+    getAsistenciasLugar,
+    getAsistenciaLugar,
+    insertAsistenciaLugar,
+    updateAsistenciaLugar,
+    deleteAsistenciaLugar
+} = require("../controllers/asistenciaLugar");
 
 const router = Router();
 
-router.get('/', getAsistenciaLugar);
+router.get('/', getAsistenciasLugar);
+
+router.get('/:uid', getAsistenciaLugar);
 
 router.post('/', insertAsistenciaLugar);
+
+router.put('/:uid', updateAsistenciaLugar);
+
+router.delete('/:uid', deleteAsistenciaLugar);
 
 module.exports = router;

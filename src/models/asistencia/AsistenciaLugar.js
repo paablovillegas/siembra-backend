@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const AsistenciaSchema = require("./Asistencia");
+const AsistenciaSchema = require("./AsistenciaSchema");
 
 const AsistenciaLugarSchema = new Schema({
     lugar_trabajo: {
@@ -25,5 +25,5 @@ const AsistenciaLugarSchema = new Schema({
 module.exports = new model(
     'AsistenciaLugar',
     AsistenciaLugarSchema,
-    'Asistencias_Lugar',
+    'asistencias_lugares',
 );

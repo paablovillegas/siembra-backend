@@ -7,11 +7,13 @@ const TrabajadorAsistenciaSchema = require("./TrabajadorAsistencia");
 
 const AsistenciaSchema = new Schema({
     trabajador: {
-        type: TrabajadorAsistenciaSchema,
+        type: Schema.Types.ObjectId,
+        ref: 'Trabajador',
         required: true,
     },
     asistencia: {
         type: AsistenciaTrabajadorSchema,
+        required: true,
     },
     extras: [ExtraSchema],
     bonos: [BonoSchema],
