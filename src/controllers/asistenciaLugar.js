@@ -36,6 +36,30 @@ const getAsistenciasLugar = async (req = request, res = response) => {
                 asistencia,
                 { path: 'lugar_trabajo', select: '-trabajadores -fletes' }
             ))
+            .then(asistencia => Trabajador.populate(
+                asistencia,
+                { path: 'trabajadores.trabajador' }
+            ))
+            .then(asistencia => Actividad.populate(
+                asistencia,
+                { path: 'trabajadores.asistencia.actividades.actividad' }
+            ))
+            .then(asistencia => Actividad.populate(
+                asistencia,
+                { path: 'trabajadores.extras.actividades.actividad' }
+            ))
+            .then(asistencia => Tabla.populate(
+                asistencia,
+                { path: 'trabajadores.extras.actividades.tablas' }
+            ))
+            .then(asistencia => Actividad.populate(
+                asistencia,
+                { path: 'trabajadores.bonos.actividades.actividad' }
+            ))
+            .then(asistencia => Tabla.populate(
+                asistencia,
+                { path: 'trabajadores.bonos.actividades.tablas' }
+            ))
             .then(asistencias => res.json({ ok: true, asistencias }));
     } catch (err) {
         console.log(err);
@@ -54,6 +78,30 @@ const insertAsistenciaLugar = async (req = request, res = response) => {
         .then(asistencia => LugarTrabajo.populate(
             asistencia,
             { path: 'lugar_trabajo', select: '-trabajadores -fletes' }
+        ))
+        .then(asistencia => Trabajador.populate(
+            asistencia,
+            { path: 'trabajadores.trabajador' }
+        ))
+        .then(asistencia => Actividad.populate(
+            asistencia,
+            { path: 'trabajadores.asistencia.actividades.actividad' }
+        ))
+        .then(asistencia => Actividad.populate(
+            asistencia,
+            { path: 'trabajadores.extras.actividades.actividad' }
+        ))
+        .then(asistencia => Tabla.populate(
+            asistencia,
+            { path: 'trabajadores.extras.actividades.tablas' }
+        ))
+        .then(asistencia => Actividad.populate(
+            asistencia,
+            { path: 'trabajadores.bonos.actividades.actividad' }
+        ))
+        .then(asistencia => Tabla.populate(
+            asistencia,
+            { path: 'trabajadores.bonos.actividades.tablas' }
         ))
         .then(asistencias => res.json({ ok: true, asistencias }))
         .catch(err => {
@@ -90,7 +138,7 @@ const updateAsistenciaLugar = async (req = request, res = response) => {
         ))
         .then(asistencia => Tabla.populate(
             asistencia,
-            { path: 'trabajadores.extras.actividades.tablas'}
+            { path: 'trabajadores.extras.actividades.tablas' }
         ))
         .then(asistencia => Actividad.populate(
             asistencia,
@@ -98,7 +146,7 @@ const updateAsistenciaLugar = async (req = request, res = response) => {
         ))
         .then(asistencia => Tabla.populate(
             asistencia,
-            { path: 'trabajadores.bonos.actividades.tablas'}
+            { path: 'trabajadores.bonos.actividades.tablas' }
         ))
         .then(asistencia => res.json({ ok: true, asistencia }))
         .catch(err => {

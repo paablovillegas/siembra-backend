@@ -28,6 +28,11 @@ const CosechaSchema = new Schema({
         enum: ['Nacional', 'Importacion'],
         required: true,
     },
+    estatus: {
+        type: Number,
+        required: true,
+        default: 1,
+    },
     ciclos: [CicloCosechaSchema],
 });
 

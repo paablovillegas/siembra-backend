@@ -50,7 +50,7 @@ app.use('/siembra/areas', require('./routes/area'));
 app.use('/siembra/productos', require('./routes/producto'));
 app.use('/siembra/ciclos', require('./routes/ciclo'));
 app.use('/siembra/lugares_trabajo', require('./routes/lugarTrabajo'));
-app.use('/siembra/asistencia_lugar', require('./routes/asistenciaLugar'));
+app.use('/siembra/asistencias_lugar', require('./routes/asistenciaLugar'));
 app.use('/siembra/cosechas', require('./routes/cosecha'));
 
 const { PORT } = process.env;
